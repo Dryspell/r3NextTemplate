@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
+import { Vector3 } from 'three'
 
 const View = dynamic(() => import('src/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -24,13 +25,15 @@ const MeshPortal = dynamic(() => import('src/components/canvas/MeshPortal').then
   ssr: false,
 })
 
+export const DEFAULT_CAMERA_POSITION = new Vector3(0, 0, 10)
+
 export default function Page() {
   return (
     <>
       <View className='absolute top-0 flex flex-col items-center justify-center w-full h-screen'>
         <Suspense fallback={null}>
           <MeshPortal />
-          <Common cameraPosition={[0, 0, 10]} />
+          <Common cameraPosition={DEFAULT_CAMERA_POSITION} />
         </Suspense>
       </View>
     </>

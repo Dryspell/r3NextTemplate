@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.5 public/models/Ninja.gltf -o src/components/Ninja.jsx
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export function Ninja(props) {
+export function Ninja({ hovered, ...props }) {
   const group = useRef()
   // @ts-expect-error
   const { nodes, materials, animations } = useGLTF('/models/Ninja.gltf')
@@ -14,9 +14,10 @@ export function Ninja(props) {
 
   // @ts-expect-error
   useEffect(() => {
-    actions['Idle'].reset().fadeIn(0.5).play()
-    return () => actions['Idle'].fadeOut(0.5)
-  }, [])
+    const animation = hovered ? 'Wave' : 'Idle'
+    actions[animation].reset().fadeIn(0.5).play()
+    return () => actions[animation].fadeOut(0.5)
+  }, [hovered])
 
   return (
     <group ref={group} {...props} dispose={null}>

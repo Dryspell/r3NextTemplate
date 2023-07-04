@@ -19,15 +19,18 @@ const View = dynamic(() => import('src/components/canvas/View').then((mod) => mo
   ),
 })
 const Common = dynamic(() => import('src/components/canvas/View').then((mod) => mod.Common), { ssr: false })
-const Box = dynamic(() => import('src/components/canvas/Examples').then((mod) => mod.Box), { ssr: false })
+
+const MeshPortal = dynamic(() => import('src/components/canvas/MeshPortal').then((mod) => mod.PortalScene), {
+  ssr: false,
+})
 
 export default function Page() {
   return (
     <>
       <View className='absolute top-0 flex flex-col items-center justify-center w-full h-screen'>
         <Suspense fallback={null}>
-          <Box />
-          <Common />
+          <MeshPortal />
+          <Common cameraPosition={[0, 0, 10]} />
         </Suspense>
       </View>
     </>

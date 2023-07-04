@@ -25,7 +25,6 @@ const MeshPortal = dynamic(() => import('src/components/canvas/MeshPortal').then
   ssr: false,
 })
 
-export const DEFAULT_CAMERA_POSITION = new Vector3(0, 0, 10)
 
 export default function Page() {
   return (
@@ -33,7 +32,7 @@ export default function Page() {
       <View className='absolute top-0 flex flex-col items-center justify-center w-full h-screen'>
         <Suspense fallback={null}>
           <MeshPortal />
-          <Common cameraPosition={DEFAULT_CAMERA_POSITION} />
+          <Common cameraPosition={[0, 0, 10]} />
         </Suspense>
       </View>
     </>

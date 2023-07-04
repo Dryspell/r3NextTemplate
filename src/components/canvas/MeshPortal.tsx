@@ -17,7 +17,6 @@ import { Tribal } from 'src/components/models/Tribal'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { easing } from 'maath'
-import { DEFAULT_CAMERA_POSITION } from '../../../app/meshportal/page'
 
 const MonsterStage = ({
   children,
@@ -96,18 +95,10 @@ export const PortalScene = ({ route = '/', ...props }) => {
       const targetPosition = new THREE.Vector3()
       scene.getObjectByName(activeMonster)?.getWorldPosition(targetPosition)
       cameraControlsRef?.current && // @ts-expect-error
-        cameraControlsRef?.current?.setLookAt(
-          0,
-          0,
-          DEFAULT_CAMERA_POSITION.z / 2,
-          targetPosition.x,
-          targetPosition.y,
-          targetPosition.z,
-          true,
-        )
+        cameraControlsRef?.current?.setLookAt(0, 0, 10 / 2, targetPosition.x, targetPosition.y, targetPosition.z, true)
     } else {
       cameraControlsRef?.current && //@ts-expect-error
-        cameraControlsRef?.current?.setLookAt(0, 0, DEFAULT_CAMERA_POSITION.z, 0, 0, 0, true)
+        cameraControlsRef?.current?.setLookAt(0, 0, 10, 0, 0, 0, true)
     }
   }, [activeMonster])
 

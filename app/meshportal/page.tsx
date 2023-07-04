@@ -30,7 +30,7 @@ export default function Page() {
   return (
     <>
       <View className='absolute top-0 flex flex-col items-center justify-center w-full h-screen'>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div>Loading...</div>}>
           <MeshPortal />
           <Common cameraPosition={[0, 0, 10]} />
         </Suspense>

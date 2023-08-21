@@ -1,11 +1,27 @@
-'use client'
+"use client";
 
-import { forwardRef, Suspense, useEffect, useImperativeHandle, useRef } from 'react'
-import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
-import { Three } from 'src/helpers/components/Three'
-import { Vector3 } from '@react-three/fiber'
+import {
+  forwardRef,
+  Suspense,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  View as ViewImpl,
+} from "@react-three/drei";
+import { Three } from "src/helpers/components/Three";
+import { Vector3 } from "@react-three/fiber";
 
-export const Common = ({ color, cameraPosition }: { color?: string; cameraPosition?: Vector3 }) => {
+export const CameraEnvironment = ({
+  color,
+  cameraPosition,
+}: {
+  color?: string;
+  cameraPosition?: Vector3;
+}) => {
   // useEffect(() => {
   //   console.log(cameraPosition)
   // }, [cameraPosition])
@@ -16,14 +32,18 @@ export const Common = ({ color, cameraPosition }: { color?: string; cameraPositi
       <ambientLight intensity={0.5} />
       <pointLight position={[20, 30, 10]} intensity={1} />
       <pointLight position={[-10, -10, -10]} color='blue' />
-      <PerspectiveCamera makeDefault fov={30} position={cameraPosition || [0, 0, 6]} />
+      <PerspectiveCamera
+        makeDefault
+        fov={30}
+        position={cameraPosition || [0, 0, 6]}
+      />
     </Suspense>
-  )
-}
+  );
+};
 
 const View = forwardRef(({ children, orbit, ...props }: any, ref) => {
-  const localRef = useRef(null)
-  useImperativeHandle(ref, () => localRef.current)
+  const localRef = useRef(null);
+  useImperativeHandle(ref, () => localRef.current);
 
   return (
     <>
@@ -35,8 +55,8 @@ const View = forwardRef(({ children, orbit, ...props }: any, ref) => {
         </ViewImpl>
       </Three>
     </>
-  )
-})
-View.displayName = 'View'
+  );
+});
+View.displayName = "View";
 
-export { View }
+export { View };

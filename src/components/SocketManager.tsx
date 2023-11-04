@@ -17,7 +17,6 @@ export const SocketManager = (props: {
   >;
 }) => {
   const [connected, setConnected] = useState(socket.connected);
-  console.log();
 
   useEffect(() => {
     const onConnect = () => {

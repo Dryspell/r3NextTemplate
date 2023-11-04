@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { generateCharacter } from "../../../socketServer";
 
-export const socket = io("http://localhost:3003", {
-  autoConnect: false,
-});
+export const socket = io(
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3003"
+    : "https://turbo-socket-socket-server.vercel.app/",
+  {
+    autoConnect: false,
+  },
+);
 
 export const SocketManager = (props: {
   setCharacters: React.Dispatch<
@@ -12,6 +17,7 @@ export const SocketManager = (props: {
   >;
 }) => {
   const [connected, setConnected] = useState(socket.connected);
+  console.log();
 
   useEffect(() => {
     const onConnect = () => {
